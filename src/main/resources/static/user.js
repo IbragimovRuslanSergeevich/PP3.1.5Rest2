@@ -5,17 +5,12 @@ let myUser = "";
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
 
-    fetch("http://localhost:8080/user")
+    fetch("http://localhost:8080/api/user")
         .then(res => res.json())
         .then(data => {
             myUser = data;
             console.log(data)
             showOneUser(myUser);
-            data.name
-            data.id
-            data.username
-            data.surname
-
         })
         .catch(error => console.error("Ошибка запроса:", error));
 
@@ -33,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Перебор ролей и добавление их в ячейку
         if (user.roles !== undefined) {
             user.roles.forEach(role => {
-                temp += role.roleType + " "; // предполагаем, что имя роли находится в свойстве roleType
+                temp += role.roleType.replaceAll("ROLE_", "") + " "; // предполагаем, что имя роли находится в свойстве roleType
             });
         }
 

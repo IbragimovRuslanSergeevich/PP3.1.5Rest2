@@ -15,10 +15,12 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class RestAdminController {
 
     private final UserService userService;
@@ -38,6 +40,18 @@ public class RestAdminController {
     public ResponseEntity<List<User>> show() {
         List<User> users = userService.getUsersList();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+//    @GetMapping("/user")
+//    public ResponseEntity<User> showIdUser(Principal principal) {
+//        User user = userService.findByUsername(principal.getName());
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
+
+    @GetMapping("/current")
+    public ResponseEntity<User> currentUser(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
