@@ -42,11 +42,6 @@ public class RestAdminController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-//    @GetMapping("/user")
-//    public ResponseEntity<User> showIdUser(Principal principal) {
-//        User user = userService.findByUsername(principal.getName());
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-//    }
 
     @GetMapping("/current")
     public ResponseEntity<User> currentUser(Principal principal) {
